@@ -95,7 +95,7 @@ get_ipython().system('nvidia-smi')
 
 
 ## path
-drive_path = '/mnt/sda4/lab-cnn/meses/'
+drive_path = '/mnt/sda4/lab-03/meses/'
 
 ## Classes
 num_classes = 12
