@@ -296,9 +296,9 @@ print ('----------------------------------------------------')
 model.compile(metrics=['accuracy'], loss=keras.losses.categorical_crossentropy, optimizer=keras.optimizers.Adadelta(learning_rate=0.01))
 
 ## Trains the model
-history = model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=n_epochs, verbose=1, validation_data=(x_test, y_test))
-print("Trainando...")
-score = model.evaluate(x_test, y_test, verbose=1)
+print("Treinando....")
+history = model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=n_epochs, verbose=0, validation_data=(x_test, y_test))
+score = model.evaluate(x_test, y_test, verbose=)
 print ('\n----------------------------------------------------\n')
 print ('Test loss:', score[0])
 print ('Test accuracy:', score[1])
