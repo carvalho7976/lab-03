@@ -85,7 +85,7 @@ print('Done')
 # In[4]:
 
 
-get_ipython().system('nvidia-smi')
+#get_ipython().system('nvidia-smi')
 
 
 # #Definindo algumas variáveis
