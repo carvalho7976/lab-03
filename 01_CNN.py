@@ -148,13 +148,14 @@ def load_images(image_paths, convert=False):
 
 	x = []
 	y = []
+	print("Loading images....")
 	for image_path in image_paths:
 
 		path, label = image_path.split(' ')
 		
 		## Image path
 		path= drive_path + 'data/' + path
-		print (path)
+		#print (path)
 
 		if convert:
 			image_pil = Image.open(path).convert('RGB') 
@@ -296,8 +297,8 @@ model.compile(metrics=['accuracy'], loss=keras.losses.categorical_crossentropy, 
 
 ## Trains the model
 history = model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=n_epochs, verbose=1, validation_data=(x_test, y_test))
-
-score = model.evaluate(x_test, y_test, verbose=0)
+print("Trainando...")
+score = model.evaluate(x_test, y_test, verbose=1)
 print ('\n----------------------------------------------------\n')
 print ('Test loss:', score[0])
 print ('Test accuracy:', score[1])
