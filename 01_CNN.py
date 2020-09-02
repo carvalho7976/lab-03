@@ -53,6 +53,7 @@ from sklearn.metrics import confusion_matrix
 from PIL import Image
 
 import keras
+from keras.preprocessing.image import ImageDataGenerator
 from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
@@ -127,6 +128,13 @@ print('Done')
 ## Load Images
 
 def load_images(image_paths, convert=False):
+	data_gen_args = dict(rotation_range=0.2,
+                  width_shift_range=0.05,
+                  height_shift_range=0.05,
+                  shear_range=0.05,
+                  zoom_range=0.05,
+                  horizontal_flip=True,
+                  fill_mode='nearest')
 
 	x = []
 	y = []
@@ -199,6 +207,7 @@ def load_dataset(train_file, test_file, resize, convert=False, size=(224,224)):
 	return (x_train, y_train), (x_test, y_test)
  
 print('Done')
+
 
 
 # # **1. Carregando as bases de treino e teste**
@@ -300,13 +309,23 @@ print ('----------------------------------------------------')
 
 
 # # **3. Configurando e treinando a CNN**
+#Data aumentation
+aug = ImageDataGenerator(
+		rotation_range=20,
+		zoom_range=0.15,
+		width_shift_range=0.2,
+		height_shift_range=0.2,
+		shear_range=0.15,
+		horizontal_flip=False,
+		fill_mode="nearest")
 
 ## Configures the model for training
 model.compile(metrics=['accuracy'], loss=keras.losses.categorical_crossentropy, optimizer=keras.optimizers.Adadelta(learning_rate=0.01))
 
+
 ## Trains the model
 print("Treinando....")
-history = model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=n_epochs, verbose=0, validation_data=(x_test, y_test))
+history = model.fit(x=aug.flow(x_train,y_train), batch_size=batch_size, epochs=n_epochs, verbose=0, validation_data=(x_test, y_test))
 score = model.evaluate(x_test, y_test, verbose=1)
 print ('\n----------------------------------------------------\n')
 print ('Test loss:', score[0])
