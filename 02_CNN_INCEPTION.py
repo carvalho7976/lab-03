@@ -195,22 +195,11 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 
 # # **2. Difinindo o modelo da CNN**
 
-## Create CNN model
-#model = Sequential()
-#model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
-#model.add(Conv2D(64, (3, 3), activation='relu'))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
-#model.add(Dropout(0.25))
-#model.add(Flatten())
-#model.add(Dense(128, activation='relu'))
-#model.add(Dropout(0.5))
-#model.add(Dense(num_classes, activation='softmax'))
-
 inception_model = InceptionV3(weights='imagenet', include_top=False)
 
 ## "Freeze" layers/weights
-for layer in inception_model.layers[:]:
-  layer.trainable = False
+#for layer in inception_model.layers[:]:
+  #layer.trainable = False
 
 ##
 # for layer in inception_model.layers[:10]:
