@@ -325,7 +325,7 @@ model.compile(metrics=['accuracy'], loss=keras.losses.categorical_crossentropy, 
 
 ## Trains the model
 print("Treinando....")
-history = model.fit(x=aug.flow(x_train,y_train),epochs=n_epochs, verbose=0, validation_data=(x_test, y_test))
+history = model.fit(x=aug.flow(x_train,y_train, batch_size=64),epochs=n_epochs, verbose=0, validation_data=(x_test, y_test))
 score = model.evaluate(x_test, y_test, verbose=1)
 print ('\n----------------------------------------------------\n')
 print ('Test loss:', score[0])
