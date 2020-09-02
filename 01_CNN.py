@@ -206,11 +206,11 @@ print('Done')
 print ("Loading database...")
 
 ## Gray Scale
-input_shape = (img_rows, img_cols, 1)
+#input_shape = (img_rows, img_cols, 1)
 #(x_train, y_train), (x_test, y_test) = load_dataset(train_file, test_file, resize=True, convert=False, size=(img_rows, img_cols))
 
 ## RGB
-#input_shape = (img_rows, img_cols, 3)
+input_shape = (img_rows, img_cols, 3)
 (x_train, y_train), (x_test, y_test) = load_dataset(train_file, test_file, resize=True, convert=True, size=(img_rows, img_cols))
 
 ## Save for the confusion matrix
