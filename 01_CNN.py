@@ -56,7 +56,7 @@ import keras
 from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Conv2D, MaxPooling2D
+from keras.layers import Conv2D, MaxPooling2D, AveragePooling2D
 from keras import backend as K
 
 from keras.applications.inception_v3 import InceptionV3
@@ -69,30 +69,17 @@ print('Done')
 
 
 # #Verificando GPU
-# 
-# (Editar > Configurações de Notebook > Acelerador de hardware > **GPU** > Salvar)
-
-# In[3]:
-
-
 #import tensorflow as tf
 #device_name = tf.test.gpu_device_name()
 #if device_name != '/device:GPU:0':
 #  raise SystemError('GPU device not found')
 #print('Found GPU at: {}'.format(device_name))
 
-
-# In[4]:
-
-
 #get_ipython().system('nvidia-smi')
 
 
 # #Definindo algumas variáveis
 # (número de classes, épocas, tamanho dos batch, **arquivos de entrada**...)
-
-# In[5]:
-
 
 ## path
 drive_path = '/mnt/sda4/lab-03/meses/'
@@ -118,9 +105,6 @@ print('Done')
 
 # #Funções para ler e preparar a base de dados
 
-# In[6]:
-
-
 ## Resize
 
 def resize_data(data, size, convert):
@@ -138,8 +122,6 @@ def resize_data(data, size, convert):
   
 print('Done')
 
-
-# In[7]:
 
 
 ## Load Images
@@ -176,9 +158,6 @@ def load_images(image_paths, convert=False):
 	return x, y
 
 print('Done')
-
-
-# In[8]:
 
 
 ## Load Dataset
@@ -224,17 +203,14 @@ print('Done')
 
 # # **1. Carregando as bases de treino e teste**
 
-# In[9]:
-
-
 print ("Loading database...")
 
 ## Gray Scale
-#input_shape = (img_rows, img_cols, 1)
+input_shape = (img_rows, img_cols, 1)
 #(x_train, y_train), (x_test, y_test) = load_dataset(train_file, test_file, resize=True, convert=False, size=(img_rows, img_cols))
 
 ## RGB
-input_shape = (img_rows, img_cols, 3)
+#input_shape = (img_rows, img_cols, 3)
 (x_train, y_train), (x_test, y_test) = load_dataset(train_file, test_file, resize=True, convert=True, size=(img_rows, img_cols))
 
 ## Save for the confusion matrix
@@ -260,19 +236,28 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 
 # # **2. Difinindo o modelo da CNN**
 
-# In[10]:
-
-
 ## Create CNN model
+#model = Sequential()
+#model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
+#model.add(Conv2D(64, (3, 3), activation='relu'))
+#model.add(MaxPooling2D(pool_size=(2, 2)))
+#model.add(Dropout(0.25))
+#model.add(Flatten())
+#model.add(Dense(128, activation='relu'))
+#model.add(Dropout(0.5))
+#model.add(Dense(num_classes, activation='softmax'))
+
+## LeNet-5
 model = Sequential()
-model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
-model.add(Conv2D(64, (3, 3), activation='relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.25))
+model.add(Conv2D(filters=6, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
+model.add(AveragePooling2D())
+model.add(Conv2D(filters=16, kernel_size=(3, 3), activation='relu'))
+model.add(AveragePooling2D())
 model.add(Flatten())
-model.add(Dense(128, activation='relu'))
-model.add(Dropout(0.5))
-model.add(Dense(num_classes, activation='softmax'))
+model.add(Dense(units=120, activation='relu'))
+model.add(Dense(units=84, activation='relu'))
+model.add(Dense(units=10, activation = 'softmax'))
+
 
 ## Print CNN layers
 print ('Network structure ----------------------------------')
@@ -288,9 +273,6 @@ print ('----------------------------------------------------')
 
 
 # # **3. Configurando e treinando a CNN**
-
-# In[11]:
-
 
 ## Configures the model for training
 model.compile(metrics=['accuracy'], loss=keras.losses.categorical_crossentropy, optimizer=keras.optimizers.Adadelta(learning_rate=0.01))
@@ -313,9 +295,6 @@ print ('\n----------------------------------------------------\n')
 
 # #Matriz de confusão
 
-# In[12]:
-
-
 pred = []
 y_pred = model.predict_classes(x_test)
 # y_pred = y_prob.argmax(axis=-1)
@@ -325,9 +304,6 @@ print (confusion_matrix(label, pred))
 
 
 # #Plotando gráficos
-
-# In[17]:
-
 
 acc = history.history['accuracy'] # history['acc'] / history['accuracy']
 val_acc = history.history['val_accuracy'] # history['val_acc'] / history['val_accuracy']
@@ -354,14 +330,6 @@ plt.savefig("loss.png")
  
 #plt.show()
 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 
