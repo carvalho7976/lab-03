@@ -248,15 +248,29 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 #model.add(Dense(num_classes, activation='softmax'))
 
 ## LeNet-5
+#model = Sequential()
+#model.add(Conv2D(filters=6, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
+#model.add(AveragePooling2D())
+#model.add(Conv2D(filters=16, kernel_size=(3, 3), activation='relu'))
+#model.add(AveragePooling2D())
+#model.add(Flatten())
+#model.add(Dense(units=128, activation='relu'))
+#model.add(Dense(units=84, activation='relu'))
+#model.add(Dense(units=12, activation = 'softmax'))
+
+## LeNet-5 - modificada com duas camadas de dropout
 model = Sequential()
 model.add(Conv2D(filters=6, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
 model.add(AveragePooling2D())
 model.add(Conv2D(filters=16, kernel_size=(3, 3), activation='relu'))
 model.add(AveragePooling2D())
+model.add(Dropout(0.25))
 model.add(Flatten())
 model.add(Dense(units=128, activation='relu'))
 model.add(Dense(units=84, activation='relu'))
+model.add(Dropout(0.5))
 model.add(Dense(units=12, activation = 'softmax'))
+
 
 
 ## Print CNN layers
