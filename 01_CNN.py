@@ -312,10 +312,8 @@ print ('----------------------------------------------------')
 # # **3. Configurando e treinando a CNN**
 #Data aumentation
 aug = ImageDataGenerator(
-		rotation_range=90,
-		brightness_range=[0.1,0.4],
-		width_shift_range= [0.1,0.3],
-		height_shift_range=[0.1,0.3],
+		rotation_range=[0.01,0.05],
+		brightness_range=[0.01,0.3],
 		fill_mode="nearest")
 
 ## Configures the model for training
