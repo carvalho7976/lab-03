@@ -315,7 +315,7 @@ aug = ImageDataGenerator(
 		featurewise_center=True, 
 		featurewise_std_normalization=True,
 		zca_whitening=True,
-		rotation_range=0.4,
+		rotation_range=0.3,
 		brightness_range=[0.1,0.5],
 		fill_mode="nearest")
 
