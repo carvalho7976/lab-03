@@ -93,7 +93,7 @@ num_classes = 12
 batch_size = 64
 
 ## Epochs
-n_epochs = 32
+n_epochs = 200
 
 ## Train and Test files
 train_file = drive_path + 'train.txt'
@@ -315,7 +315,7 @@ aug = ImageDataGenerator(
 		featurewise_center=True, 
 		featurewise_std_normalization=True,
 		zca_whitening=True,
-		rotation_range=0.4,
+		rotation_range=0.3,
 		brightness_range=[0.1,0.5],
 		fill_mode="nearest")
 
@@ -327,7 +327,7 @@ model.compile(metrics=['accuracy'], loss=keras.losses.categorical_crossentropy, 
 print("Treinando....")
 
 #history = model.fit(x=x_train, y=y_train, batch_size=batch_size,epochs=n_epochs, verbose=0, validation_data=(x_test, y_test))
-history = model.fit(x=aug.flow(x_train,y_train,batch_size=4, save_format='jpg', save_to_dir=save_path),epochs=n_epochs, verbose=0, validation_data=(x_test, y_test))
+history = model.fit(x=aug.flow(x_train,y_train,batch_size=2, save_format='jpg', save_to_dir=save_path),epochs=n_epochs, verbose=0, validation_data=(x_test, y_test))
 
 score = model.evaluate(x_test, y_test, verbose=1)
 print ('\n----------------------------------------------------\n')
