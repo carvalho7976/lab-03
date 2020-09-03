@@ -312,7 +312,7 @@ print ('----------------------------------------------------')
 # # **3. Configurando e treinando a CNN**
 #Data aumentation
 aug = ImageDataGenerator(
-		rotation_range=[0.01,0.05],
+		rotation_range=0.02,
 		brightness_range=[0.01,0.3],
 		fill_mode="nearest")
 
