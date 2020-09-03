@@ -90,10 +90,10 @@ save_path = '/mnt/sda4/data-aumentations-lab03/'
 num_classes = 12
 
 ## Batch Size
-batch_size = 64
+batch_size = 128
 
 ## Epochs
-n_epochs = 64
+n_epochs = 128
 
 ## Train and Test files
 train_file = drive_path + 'train.txt'
