@@ -90,10 +90,10 @@ save_path = '/mnt/sda4/data-aumentations-lab03/'
 num_classes = 12
 
 ## Batch Size
-batch_size = 128
+batch_size = 64
 
 ## Epochs
-n_epochs = 128
+n_epochs = 64
 
 ## Train and Test files
 train_file = drive_path + 'train.txt'
@@ -258,15 +258,15 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 #model.add(Dense(num_classes, activation='softmax'))
 
 ## LeNet-5
-#model = Sequential()
-#model.add(Conv2D(filters=6, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
-#model.add(AveragePooling2D())
-#model.add(Conv2D(filters=16, kernel_size=(3, 3), activation='relu'))
-#model.add(AveragePooling2D())
-#model.add(Flatten())
-#model.add(Dense(units=128, activation='relu'))
-#model.add(Dense(units=84, activation='relu'))
-#model.add(Dense(units=12, activation = 'softmax'))
+model = Sequential()
+model.add(Conv2D(filters=6, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
+model.add(AveragePooling2D())
+model.add(Conv2D(filters=16, kernel_size=(3, 3), activation='relu'))
+model.add(AveragePooling2D())
+model.add(Flatten())
+model.add(Dense(units=128, activation='relu'))
+model.add(Dense(units=84, activation='relu'))
+model.add(Dense(units=12, activation = 'softmax'))
 
 ## LeNet-5 - modificada com duas camadas de dropout 
 #model = Sequential()
@@ -282,17 +282,17 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 #model.add(Dense(units=12, activation = 'softmax'))
 
 ## LeNet-5 - modificada com duas camadas de dropout e maxpooling e filtros 16 32
-model = Sequential()
-model.add(Conv2D(filters=32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Conv2D(filters=64, kernel_size=(3, 3), activation='relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.25))
-model.add(Flatten())
-model.add(Dense(units=128, activation='relu'))
-model.add(Dense(units=84, activation='relu'))
-model.add(Dropout(0.5))
-model.add(Dense(units=12, activation = 'softmax'))
+#model = Sequential()
+#model.add(Conv2D(filters=32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
+#model.add(MaxPooling2D(pool_size=(2, 2)))
+#model.add(Conv2D(filters=64, kernel_size=(3, 3), activation='relu'))
+#model.add(MaxPooling2D(pool_size=(2, 2)))
+#model.add(Dropout(0.25))
+#model.add(Flatten())
+#model.add(Dense(units=128, activation='relu'))
+#model.add(Dense(units=84, activation='relu'))
+#model.add(Dropout(0.5))
+#model.add(Dense(units=12, activation = 'softmax'))
 
 
 
