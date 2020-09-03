@@ -1,5 +1,6 @@
 from keras.preprocessing import image
 from keras.applications.inception_v3 import InceptionV3
+from keras.applications.resnet50 import ResNet50
 from keras.applications.inception_v3 import preprocess_input
 import numpy as np
 import os
@@ -37,8 +38,8 @@ print('Done')
 # - weights='imagenet' (inicializa pesos pre-treinado na ImageNet)
 # - include_top=False (nao inclui as fully-connected layers)
 # - input_shape=(299, 299, 3) (DEFAULT) (minimo=75x75)
-model = InceptionV3(weights='imagenet', include_top=False)
-
+#model = InceptionV3(weights='imagenet', include_top=False)
+model = ResNet50(weights='imagenet', include_top=False)
 # Mostra a arquitetura da rede
 model.summary()
 print ("Loading...")
@@ -56,10 +57,11 @@ for i in conteudo_entrada:
   img_data = preprocess_input(img_data)
 
   # Passa a imagem pela rede
-  inception_features = model.predict(img_data)
+  #inception_features = model.predict(img_data)
+  resnet_features = model.predict(img_data) 
 
   # Flatten
-  features_np = np.array(inception_features)
+  features_np = np.array(resnet_features)
   features_np = features_np.flatten()
 
   # Salva no formato do libsvm
