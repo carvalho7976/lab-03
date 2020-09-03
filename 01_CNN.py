@@ -90,10 +90,10 @@ save_path = '/mnt/sda4/data-aumentations-lab03/'
 num_classes = 12
 
 ## Batch Size
-batch_size = 128
+batch_size = 64
 
 ## Epochs
-n_epochs = 128
+n_epochs = 64
 
 ## Train and Test files
 train_file = drive_path + 'train.txt'
@@ -315,7 +315,7 @@ aug = ImageDataGenerator(
 		featurewise_center=True, 
 		featurewise_std_normalization=True,
 		zca_whitening=True,
-		rotation_range=0.3,
+		rotation_range=0.4,
 		brightness_range=[0.1,0.5],
 		fill_mode="nearest")
 
