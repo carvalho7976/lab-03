@@ -51,7 +51,7 @@ num_classes = 12
 batch_size = 64
 
 ## Epochs
-n_epochs = 64
+n_epochs = 200
 
 ## Train and Test files
 train_file = drive_path + 'train.txt'
@@ -200,8 +200,8 @@ inception_model = InceptionV3(weights='imagenet', include_top=False)
 #resnet_model = ResNet50(weights='imagenet', include_top=False)
 
 ## "Freeze" layers/weights
-#for layer in inception_model.layers[:]:
-#  layer.trainable = False
+for layer in inception_model.layers[:]:
+  layer.trainable = False
 #for layer in resnet_model.layers[:]:
   #layer.trainable = False
 
