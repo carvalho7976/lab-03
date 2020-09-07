@@ -215,7 +215,6 @@ model.add(Conv2D(filters=6, kernel_size=(3, 3), activation='relu', input_shape=i
 model.add(AveragePooling2D())
 model.add(Conv2D(filters=16, kernel_size=(3, 3), activation='relu'))
 model.add(AveragePooling2D())
-model.add(Flatten())
 model.add(Dense(units=128, activation='relu'))
 model.add(Dense(units=84, activation='relu'))
 model.add(Dense(units=12, activation = 'softmax'))
