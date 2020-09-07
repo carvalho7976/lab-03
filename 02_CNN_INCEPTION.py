@@ -214,7 +214,7 @@ for layer in inception_model.layers[:]:
 model = Sequential()
 model.add(inception_model)
 model.add(GlobalAveragePooling2D())
-model.add(Dense(128, activation='relu'))
+model.add(Dense(128, activation='relu'), input_shape=input_shape)
 model.add(Dropout(0.5))
 model.add(Dense(units=84, activation='relu'))
 model.add(Dropout(0.5))
