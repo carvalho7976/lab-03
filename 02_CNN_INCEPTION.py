@@ -51,7 +51,7 @@ num_classes = 12
 batch_size = 64
 
 ## Epochs
-n_epochs = 200
+n_epochs = 64
 
 ## Train and Test files
 train_file = drive_path + 'train.txt'
