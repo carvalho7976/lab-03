@@ -20,6 +20,7 @@ from keras import backend as K
 
 from keras.applications.inception_v3 import InceptionV3
 from keras.applications.inception_v3 import preprocess_input
+from keras.applications.resnet50 import ResNet50
 from keras.models import Model
 from keras.layers import GlobalAveragePooling2D
 from keras.preprocessing import image
@@ -196,6 +197,7 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 # # **2. Difinindo o modelo da CNN**
 
 inception_model = InceptionV3(weights='imagenet', include_top=False)
+#resnet_model = ResNet50(weights='imagenet', include_top=False)
 
 ## "Freeze" layers/weights
 for layer in inception_model.layers[:]:
@@ -209,10 +211,11 @@ for layer in inception_model.layers[:]:
 
 model = Sequential()
 model.add(inception_model)
-model.add(GlobalAveragePooling2D())
-model.add(Dense(128, activation='relu'))
-model.add(Dropout(0.5))
-model.add(Dense(num_classes, activation='softmax'))
+model.add(AveragePooling2D())
+model.add(Flatten())
+model.add(Dense(units=128, activation='relu'))
+model.add(Dense(units=84, activation='relu'))
+model.add(Dense(units=12, activation = 'softmax'))
 
 
 
