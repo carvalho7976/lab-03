@@ -211,10 +211,6 @@ for layer in inception_model.layers[:]:
 
 model = Sequential()
 model.add(inception_model)
-model.add(AveragePooling2D())
-model.add(Flatten())
-model.add(Dense(units=128, activation='relu'))
-model.add(Dense(units=84, activation='relu'))
 model.add(Dense(units=12, activation = 'softmax'))
 
 
