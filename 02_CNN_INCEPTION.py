@@ -214,6 +214,8 @@ model.add(inception_model)
 model.add(GlobalAveragePooling2D())
 model.add(Dense(128, activation='relu'))
 model.add(Dropout(0.5))
+model.add(Dense(units=84, activation='relu'))
+model.add(Dropout(0.5))
 model.add(Dense(num_classes, activation='softmax'))
 
 
@@ -238,7 +240,7 @@ model.compile(metrics=['accuracy'], loss=keras.losses.categorical_crossentropy, 
 
 ## Trains the model
 print("Treinando....")
-history = model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=n_epochs, verbose=1, validation_data=(x_test, y_test))
+history = model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=n_epochs, verbose=0, validation_data=(x_test, y_test))
 score = model.evaluate(x_test, y_test, verbose=1)
 print ('\n----------------------------------------------------\n')
 print ('Test loss:', score[0])
